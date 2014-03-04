@@ -1,7 +1,7 @@
 TKCollectionExample
 ===================
 
-TKCollectionExample is a example of PSCollectionView , It's a Pinterest style scroll view designed to be used similar to a UITableView.
+TKCollectionExample is a dynamic CollectionView , It's a Pinterest style scroll view designed to be used similar to a UITableView.
 
 
 ![logo](http://i.imgur.com/3sqnJkc.png)
