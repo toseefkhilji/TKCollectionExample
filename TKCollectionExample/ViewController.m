@@ -40,18 +40,49 @@
 -(NSInteger)numberOfRowsInCollectionView:(TKCollectionView *)collectionView{
     return arrayData.count;
 }
-
-- (Class)collectionView:(TKCollectionView *)collectionView cellClassForRowAtIndex:(NSInteger)index {
-    return [AsyncImageView class];
-}
-- (AsyncImageView *)collectionView:(TKCollectionView *)collectionView cellForRowAtIndex:(NSInteger)index {
+- (UIView *)collectionView:(TKCollectionView *)collectionView cellForRowAtIndex:(NSInteger)index {
     
-    AsyncImageView *cell = (AsyncImageView *)[psView dequeueReusableViewForClass:[AsyncImageView class]];
+    UIView *cell = (UIView *)[psView dequeueReusableViewForClass:[UIView class]];
     if (!cell) {
-        cell = [[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, 100 , 100)];
-        [cell loadImageFromURL:arrayData[index]];
+        cell=[[UIView alloc]init];
+        //cell.translatesAutoresizingMaskIntoConstraints=NO;
+        AsyncImageView *image = [[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, 60 , 60)];
+        [image loadImageFromURL:arrayData[index]];
         //  cell.delegate=self;
+        image.translatesAutoresizingMaskIntoConstraints=NO;
+        
+        UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 40)];
+        lbl.text=@"The UIView class defines a rectangular area on the screen and the interfaces for managing the content in that area. At runtime, a view object handles the rendering of any content in its area and also handles any interactions with that content. The UIView class itself provides basic behavior for filling its rectangular area with a background color.";
+        lbl.backgroundColor=[UIColor clearColor];
+        lbl.font=[UIFont systemFontOfSize:12];
+        lbl.numberOfLines=0;
+        lbl.textColor=[UIColor whiteColor];
+        lbl.backgroundColor=[UIColor colorWithRed:20/255.0 green:20/255.0 blue:20/255.0 alpha:0.50];
         [cell setBackgroundColor:[UIColor grayColor]];
+        
+        lbl.translatesAutoresizingMaskIntoConstraints=NO;
+        
+        [cell addSubview:image];
+        [cell addSubview:lbl];
+        
+        
+        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(image,lbl);
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[image]-5-|" options:0 metrics:nil views:viewsDictionary];
+        [cell addConstraints:constraints];
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[lbl]-5-|" options:0 metrics:nil views:viewsDictionary];
+        [cell addConstraints:constraints];
+        
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[image]-5-|"
+                                                              options: NSLayoutFormatAlignAllRight
+                                                              metrics:nil
+                                                                views:viewsDictionary];
+        [cell addConstraints:constraints];
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[lbl(30)]|"
+                                                              options: NSLayoutFormatAlignAllRight
+                                                              metrics:nil
+                                                                views:viewsDictionary];
+        [cell addConstraints:constraints];
+        
     }
     return cell;
 }
