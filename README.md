@@ -1,7 +1,7 @@
 TKCollectionExample
 ===================
 
-TKCollectionExample is a dynamic CollectionView , It's a Pinterest style scroll view designed to be used similar to a UITableView.
+TKCollectionExample is a dynamic CollectionView , It's a Pinterest style scroll view designed to be used similar to a UITableView. It is Used for dispalying News App or some Products app.
 
 
 ![logo](http://i.imgur.com/USVfsku.png)
@@ -9,6 +9,7 @@ TKCollectionExample is a dynamic CollectionView , It's a Pinterest style scroll 
 ## Requirements ##
 
 1) Xcode 5 and above versions.
+
 2) ARC
 
 
